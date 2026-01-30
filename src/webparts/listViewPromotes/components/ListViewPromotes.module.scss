@@ -1,0 +1,520 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+$dark-blue: #0c334d;
+$grey-93: #eee;
+$grey-80: #ccc;
+$white: #fff;
+$black: #000;
+
+$desktop: 1024px;
+
+.listViewPromotes {
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .webparttitle {
+    font-size: 28px;
+    font-weight: 500;
+    margin: 0 0 10px;
+  }
+
+  .description {
+    margin-top: 0;
+    margin-bottom: 40px;
+  }
+
+  .employeeList {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    margin-top: 20px;
+
+    .employeeCard {
+      padding: 10px 0;
+      display: flex;
+      width: 100%;
+      font-size: 12px;
+
+      @media screen and (min-width: 768px) {
+        width: 33.3333%;
+
+        &:nth-child(3n+1) {
+          padding-right: 10px;
+          padding-left: 0;
+        }
+
+        &:nth-child(3n+2) {
+          padding-right: 10px;
+          padding-left: 10px;
+        }
+
+        &:nth-child(3n+3) {
+          padding-right: 0;
+          padding-left: 10px;
+        }
+      }
+  
+      .inner {
+        background: $grey-93;
+        padding: 20px;
+        border-radius: 8px;
+        -webkit-box-shadow: 3px 3px 8px 0 rgba(0,0,0,.5);
+        box-shadow: 3px 3px 8px 0 rgba(0,0,0,.5);
+        display: flex;
+        width: 100%;
+
+        .photo {
+          border-radius: 8px;
+          overflow: hidden;
+          -webkit-box-shadow: 3px 3px 8px 0 rgba(0,0,0,.5);
+          box-shadow: 3px 3px 8px 0 rgba(0,0,0,.5);
+          position: relative;
+          width: 30%;
+          height: 100px;
+      
+          + .employeeInfo {
+            padding-left: 20px;
+            width: 70%;
+          }
+    
+          img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+          }
+        }
+    
+        .employeeInfo {
+          .name {
+            font-size: 16px;
+            font-weight: 600;
+
+            .namelink {
+              color: $dark-blue;
+            }
+          }
+          .promotionLevel {
+            display: none;
+          }
+          .level {
+            font-weight: 600;
+            font-size: 14px;
+          }
+
+          .overview {
+            margin-top: 15px;
+          }
+        }
+      }
+
+      &.withOverview {
+        @media screen and (min-width: 768px) {
+          width: 50%;
+
+          &:nth-child(odd) {
+            padding-left: 0;
+            padding-right: 10px;
+          }
+
+          &:nth-child(even) {
+            padding-left: 10px;
+            padding-right: 0;
+          }
+        }
+
+        .photo {
+          height: 200px;
+      
+          + .employeeInfo {
+            padding-left: 25px;
+          }
+        }
+      }
+    }
+
+    .noResults {
+      margin: 30px 0;
+      font-weight: 600;
+    }
+  }
+
+  .openFilters {
+    background-color: $dark-blue;
+    border: solid 1px $dark-blue;
+    color: $white;
+    border-radius: 5px;
+    display: flex;
+    justify-self: end;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    cursor: pointer;
+
+    i {
+      margin-right: 5px;
+    }
+
+    @media screen and (min-width: $desktop) {
+      display: none;
+    }
+  }
+
+  .filteringsortingcontainer {
+    background: $dark-blue;
+    padding: 5px;
+    position: fixed;
+    overflow-y: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: none;
+
+    &.active {
+      display: block;
+    }
+
+    @media screen and (min-width: $desktop) {
+      display: flex !important;
+      justify-content: space-between;
+      position: static;
+      overflow-y: visible;
+    }
+
+    .closeFilters {
+      color: $white;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 7px 2px;
+      cursor: pointer;
+      display: flex;
+      justify-self: end;
+      justify-content: center;
+
+      i {
+        font-size: 20px;
+        margin-right: 5px;
+      }
+
+      @media screen and (min-width: $desktop) {
+        display: none;
+      }
+    }
+
+    .filteringcontainer {
+      @media screen and (min-width: $desktop) {
+        text-align: left;
+        display: flex;
+        align-items: center;
+      }
+
+      .dropdownGroup {
+        position: relative;
+
+        @media screen and (min-width: $desktop) {
+          margin-right: .5em;
+
+          + .dropdownGroup {
+            margin-left: 5px;
+          }
+        }
+
+        button {
+          background-color: $dark-blue;
+          color: $white;
+          position: relative;
+          height: 34px;
+          padding: 0 28px 0 10px;
+          display: block;
+          cursor: pointer;
+          border: 0;
+          width: 100%;
+          text-align: left;
+
+          @media screen and (min-width: $desktop) {
+            width: auto;
+          }
+
+          &:after {
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: solid 5px $white;
+            border-left: transparent 5px solid;
+            border-right: solid 5px transparent;
+            position: absolute;
+            top: 50%;
+            right: 7px;
+            z-index: 100;
+            transition: transform .2s ease;
+            transform: rotate(0) translateY(-2.5px);
+            color: $black;
+
+            @media screen and (min-width: $desktop) {
+              top: 55%;
+            }
+
+          }
+
+          i {
+            padding-left: 6px;
+          }
+
+          &.active {
+            background: $black;
+
+            &:after {
+              transform: rotate(180deg) translateY(2.5px);
+            }
+
+            + .dropdown {
+              display: block;
+            }
+          }
+        }
+
+        .dropdown {
+          background: $white;
+          border-radius: 10px;
+          border: solid 1px $grey-80;
+          margin-top: -1px;
+          display: none;
+          overflow: hidden;
+
+          @media screen and (min-width: $desktop) {
+            position: absolute;
+            z-index: 100;
+          }
+
+          .dropdownscroll {
+            white-space: nowrap;
+            padding: 15px;
+
+            @media screen and (min-width: $desktop) {
+              max-height: 500px;
+              overflow-y: auto;
+            }
+
+          }
+
+          .dropdownOption {
+            + .dropdownOption {
+              margin-top: 5px;
+              color: $black;
+            }
+          }
+        }
+      }
+
+      .clearBtn {
+        margin: 10px 0 0 7px;
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+
+        @media screen and (min-width: $desktop) {
+          width: auto;
+          margin: 0;
+          position: static;
+        }
+      }
+    }
+
+    .sortingcontainer {
+      border-top: solid 1px $grey-80;
+      margin-top: 10px;
+      padding-top: 10px;
+
+      @media screen and (min-width: $desktop) {
+        text-align: right;
+        border-top: none;
+        margin-top: 0;
+        padding-top: 0;
+      }
+  
+      .selectContainer {
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+
+        &:after {
+          content: "";
+          display: block;
+          width: 0;
+          height: 0;
+          border-top: solid 5px $white;
+          border-left: transparent 5px solid;
+          border-right: solid 5px transparent;
+          position: absolute;
+          top: 55%;
+          transform: translate(0,-50%);
+          right: 15px;
+          z-index: 100;
+        }
+
+        option {
+          color: $black !important;
+        }
+  
+        .sortinglabel {
+          padding: 8px;
+          font-weight: bold;
+          font-size: 14px;
+          display: inline-block;
+          vertical-align: top;
+          height: 34px;
+          color: $white;
+        }
+      
+        .sorting {
+          padding: 8px 28px 8px 8px;
+          display: inline-block;
+          vertical-align: top;
+          height: 34px;
+          margin-right: 7px;
+          appearance: none;
+          border: 0;
+          background: none;
+          color: $white;
+          font-family: inherit;
+          font-size: 14px;
+        }
+      }
+
+      .switch {
+        position: relative;
+        display: inline-block;
+        vertical-align: top;
+        width: 100px;
+        height: 34px;
+        
+        input { 
+          opacity: 0;
+          width: 0;
+          height: 0;
+    
+          &:checked {
+            + .slider {
+              &:before {
+                -webkit-transform: translateX(50px);
+                -ms-transform: translateX(50px);
+                transform: translateX(50px);
+              }
+  
+              .ascText {
+                color: $white;
+              }
+  
+              .descText {
+                color: $black;
+              }
+            }
+          }
+        }
+    
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: $dark-blue;
+          -webkit-transition: .2s;
+          transition: .2s;
+          border-radius: 50vh;
+    
+          &:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 42px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .2s;
+            transition: .2s;
+            border-radius: 50vh;
+          }
+    
+          .ascText {
+            position: absolute;
+            top: 50%;
+            transform: translate(0,-50%);
+            width: 50%;
+            text-align: center;
+            display: block;
+            font-weight: bold;
+            font-size: 12px;
+            color: $black;
+          }
+        
+          .descText {
+            position: absolute;
+            top: 50%;
+            transform: translate(0,-50%);
+            right: 0;
+            width: 50%;
+            text-align: center;
+            display: block;
+            font-weight: bold;
+            font-size: 12px;
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 25px;
+
+    button {
+      background-color: $white;
+      border: solid 1px $dark-blue;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $grey-93;
+      }
+
+      &[disabled] {
+        cursor: auto;
+        border-color: inherit;
+
+        &:hover {
+          background-color: inherit;
+        }
+
+        &.active {
+          background-color: $dark-blue;
+          color: $white;
+          cursor: auto;
+          border: solid 1px $dark-blue;
+
+          &:hover {
+            background-color: $dark-blue;
+            color: $white;
+            cursor: auto;
+            border: solid 1px $dark-blue;
+          }
+        }
+      }
+    }
+  }
+
+  .resultsCount {
+    text-align: center;
+    margin-top: 10px;
+  }
+}
